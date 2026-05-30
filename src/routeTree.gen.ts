@@ -9,12 +9,18 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ProgressRouteImport } from './routes/progress'
 import { Route as EssayRouteImport } from './routes/essay'
 import { Route as ChatRouteImport } from './routes/chat'
 import { Route as AnalyzeRouteImport } from './routes/analyze'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ChatThreadIdRouteImport } from './routes/chat.$threadId'
 
+const ProgressRoute = ProgressRouteImport.update({
+  id: '/progress',
+  path: '/progress',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EssayRoute = EssayRouteImport.update({
   id: '/essay',
   path: '/essay',
@@ -46,6 +52,7 @@ export interface FileRoutesByFullPath {
   '/analyze': typeof AnalyzeRoute
   '/chat': typeof ChatRouteWithChildren
   '/essay': typeof EssayRoute
+  '/progress': typeof ProgressRoute
   '/chat/$threadId': typeof ChatThreadIdRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/analyze': typeof AnalyzeRoute
   '/chat': typeof ChatRouteWithChildren
   '/essay': typeof EssayRoute
+  '/progress': typeof ProgressRoute
   '/chat/$threadId': typeof ChatThreadIdRoute
 }
 export interface FileRoutesById {
@@ -61,14 +69,28 @@ export interface FileRoutesById {
   '/analyze': typeof AnalyzeRoute
   '/chat': typeof ChatRouteWithChildren
   '/essay': typeof EssayRoute
+  '/progress': typeof ProgressRoute
   '/chat/$threadId': typeof ChatThreadIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/analyze' | '/chat' | '/essay' | '/chat/$threadId'
+  fullPaths:
+    | '/'
+    | '/analyze'
+    | '/chat'
+    | '/essay'
+    | '/progress'
+    | '/chat/$threadId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/analyze' | '/chat' | '/essay' | '/chat/$threadId'
-  id: '__root__' | '/' | '/analyze' | '/chat' | '/essay' | '/chat/$threadId'
+  to: '/' | '/analyze' | '/chat' | '/essay' | '/progress' | '/chat/$threadId'
+  id:
+    | '__root__'
+    | '/'
+    | '/analyze'
+    | '/chat'
+    | '/essay'
+    | '/progress'
+    | '/chat/$threadId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -76,10 +98,18 @@ export interface RootRouteChildren {
   AnalyzeRoute: typeof AnalyzeRoute
   ChatRoute: typeof ChatRouteWithChildren
   EssayRoute: typeof EssayRoute
+  ProgressRoute: typeof ProgressRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/progress': {
+      id: '/progress'
+      path: '/progress'
+      fullPath: '/progress'
+      preLoaderRoute: typeof ProgressRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/essay': {
       id: '/essay'
       path: '/essay'
@@ -133,6 +163,7 @@ const rootRouteChildren: RootRouteChildren = {
   AnalyzeRoute: AnalyzeRoute,
   ChatRoute: ChatRouteWithChildren,
   EssayRoute: EssayRoute,
+  ProgressRoute: ProgressRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
