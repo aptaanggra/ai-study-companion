@@ -1,0 +1,14 @@
+# Catatan: TanStack Start butuh adapter khusus untuk Netlify saat deploy.
+# Konfigurasi ini adalah starting point; mungkin perlu disesuaikan dengan
+# adapter resmi (mis. nitro preset 'netlify') saat deploy.
+[build]
+  command = "bun run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
