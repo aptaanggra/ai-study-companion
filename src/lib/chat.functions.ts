@@ -34,7 +34,7 @@ export const startThread = createServerFn({ method: "POST" })
     if (!ctx) throw new Error("User belum dikonfigurasi");
 
     const provider = getAi();
-    const userParts: ModelMessage["content"] = [
+    const userParts: Array<TextPart | ImagePart> = [
       {
         type: "text",
         text: `Topik eksplorasi siswa: "${data.topic}".
@@ -50,10 +50,7 @@ Akhiri dengan 1 pertanyaan pemantik agar siswa lanjut berdiskusi.`,
       },
     ];
     if (data.imageDataUrl) {
-      (userParts as Array<{ type: string; [k: string]: unknown }>).push({
-        type: "image",
-        image: data.imageDataUrl,
-      });
+      userParts.push({ type: "image", image: data.imageDataUrl });
     }
 
     const { text } = await generateText({
