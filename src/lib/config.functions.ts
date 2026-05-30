@@ -17,7 +17,7 @@ export const getConfig = createServerFn({ method: "POST" })
     await ensureSchema();
     const sql = getSql();
     const rows = await sql`SELECT id, jenjang, kelas, nama FROM app_users WHERE id = ${data.userId} LIMIT 1`;
-    return rows[0] ?? null;
+    return (rows[0] as { jenjang: string; kelas: number; nama: string | null } | undefined) ?? null;
   });
 
 export const saveConfig = createServerFn({ method: "POST" })
