@@ -1,5 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
-import { generateText, type ModelMessage } from "ai";
+import { generateText, type ImagePart, type ModelMessage, type TextPart } from "ai";
 import { z } from "zod";
 import { DEFAULT_MODEL, getAi } from "./ai-gateway.server";
 import { ensureSchema, getSql } from "./db.server";
