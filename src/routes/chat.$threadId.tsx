@@ -10,6 +10,7 @@ import { getThread, sendMessage } from "@/lib/chat.functions";
 import { ArrowLeft, Send } from "lucide-react";
 
 export const Route = createFileRoute("/chat/$threadId")({
+  ssr: false,
   head: () => ({ meta: [{ title: "Thread Diskusi · EduMandiri" }] }),
   component: ThreadPage,
 });
