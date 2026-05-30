@@ -8,6 +8,7 @@ import { getConfig, saveConfig } from "@/lib/config.functions";
 import { BookOpen, FlaskConical, LineChart, ScanLine, Sparkles } from "lucide-react";
 
 export const Route = createFileRoute("/")({
+  ssr: false,
   head: () => ({ meta: [{ title: "Beranda · EduMandiri" }] }),
   component: HomePage,
 });
