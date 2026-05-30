@@ -8,6 +8,7 @@ import { getOrCreateUserId } from "@/lib/user-id";
 import { getTodayEssay, listEssays, submitEssay } from "@/lib/essay.functions";
 
 export const Route = createFileRoute("/essay")({
+  ssr: false,
   head: () => ({ meta: [{ title: "Soal Esai · EduMandiri" }] }),
   component: EssayPage,
 });

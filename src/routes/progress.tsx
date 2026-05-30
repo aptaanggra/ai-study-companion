@@ -8,6 +8,7 @@ import { getProgress } from "@/lib/progress.functions";
 import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 export const Route = createFileRoute("/progress")({
+  ssr: false,
   head: () => ({ meta: [{ title: "Progres · EduMandiri" }] }),
   component: ProgressPage,
 });

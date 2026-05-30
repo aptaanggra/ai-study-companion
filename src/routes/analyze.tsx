@@ -9,6 +9,7 @@ import { getOrCreateUserId } from "@/lib/user-id";
 import { analyzeWorksheet, getAnalysis, listAnalyses } from "@/lib/analyze.functions";
 
 export const Route = createFileRoute("/analyze")({
+  ssr: false,
   head: () => ({ meta: [{ title: "Analisa Tugas · EduMandiri" }] }),
   component: AnalyzePage,
 });
