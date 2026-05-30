@@ -9,6 +9,7 @@ import { listThreads, startThread, deleteThread } from "@/lib/chat.functions";
 import { FlaskConical, Trash2 } from "lucide-react";
 
 export const Route = createFileRoute("/chat")({
+  ssr: false,
   head: () => ({ meta: [{ title: "Diskusi Sains · EduMandiri" }] }),
   component: ChatIndex,
 });
